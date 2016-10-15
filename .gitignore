@@ -1,7 +1,7 @@
 /*
 !.gitignore
-!/src/*
-#/src/main/java/wechatConfig.properties
+!/src/
+/src/main/java/wechatConfig.properties
 !/README.md
 !/LICENSE
 !/pom.xml
