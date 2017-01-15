@@ -24,8 +24,8 @@ import org.slf4j.LoggerFactory;
 import com.alibaba.fastjson.JSON;
 import com.water9527.mp4j.base.AccessToken;
 import com.water9527.mp4j.base.AccessTokenHolder;
+import com.water9527.mp4j.base.UrlGenerator;
 import com.water9527.mp4j.base.WechatException;
-import com.water9527.mp4j.util.WechatConstants;
 
 public class MediaService {
 
@@ -35,8 +35,7 @@ public class MediaService {
 		logger.info("upload media");
 
 		AccessToken accessToken = AccessTokenHolder.getAccessToken();
-		String url = WechatConstants.API_UPLOAD_MEDIA.replace("ACCESS_TOKEN", accessToken.getToken()).replace("TYPE",
-				type);
+		String url = UrlGenerator.updateMedia(accessToken.getToken(), type);
 
 		HttpEntity httpEntity = MultipartEntityBuilder.create()
 				.setMode(HttpMultipartMode.BROWSER_COMPATIBLE).setCharset(Consts.UTF_8)

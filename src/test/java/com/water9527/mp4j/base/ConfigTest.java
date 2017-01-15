@@ -16,11 +16,8 @@ import org.junit.Test;
 public class ConfigTest {
 
 	@Test
-	public void testInit() {
+	public void testAppId() {
 		assertNotNull(Config.appId());
-		assertNotNull(Config.appUrl());
-		assertNotNull(Config.appSecret());
-		assertNotNull(Config.token());
 	}
 
 }

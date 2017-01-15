@@ -7,7 +7,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.water9527.mp4j.modules.web.Oauth2AccessToken;
 import com.water9527.mp4j.util.HttpUtils;
-import com.water9527.mp4j.util.WechatConstants;
 
 public class AccessTokenHolder {
 
@@ -32,9 +31,7 @@ public class AccessTokenHolder {
 		logger.info("request oauth2 accessToken");
 		Oauth2AccessToken token = null;
 
-		String url = WechatConstants.API_GET_OAUTH2_ACCESS_TOKEN.replace("APPID", Config.appId())
-				.replace("SECRET", Config.appSecret()).replace("CODE", code);
-		String entity = HttpUtils.httpGet(url);
+		String entity = HttpUtils.httpGet(UrlGenerator.getAuth2AccessToken(code));
 
 		JSONObject jsonObject = JSON.parseObject(entity);
 
@@ -71,9 +68,7 @@ public class AccessTokenHolder {
 	private static void requestAccessToken() {
 		logger.info("请求AccessToken");
 
-		String url = WechatConstants.API_GET_ACCESS_TOKEN.replace("APPID", Config.appId())
-				.replace("APPSECRET", Config.appSecret());
-		String entity = HttpUtils.httpGet(url);
+		String entity = HttpUtils.httpGet(UrlGenerator.getAccessToken());
 
 		JSONObject jsonObject = JSONObject.parseObject(entity);
 		String token = jsonObject.getString("access_token");
@@ -98,7 +93,7 @@ public class AccessTokenHolder {
 	private static void requestTicket() {
 		logger.info("请求jsapi_ticket");
 
-		String url = WechatConstants.API_GET_TICKET.replace("ACCESS_TOKEN", getAccessToken().getToken());
+		String url = UrlGenerator.getTicket(getAccessToken().getToken());
 		String entity = HttpUtils.httpGet(url);
 
 		JSONObject jsonObject = JSONObject.parseObject(entity);
