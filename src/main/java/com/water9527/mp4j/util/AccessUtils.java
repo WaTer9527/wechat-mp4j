@@ -35,11 +35,10 @@ public class AccessUtils {
 		if(signature == null || timestamp == null || nonce == null || echostr == null)
 			throw new WechatException("invalid parameter number");
 		
-		String token = Config.getInstance().getToken();
 		Map<String, String> paramsMap = new HashMap<>();
 		String mySignature;
 
-		paramsMap.put("token", token);
+		paramsMap.put("token", Config.token());
 		paramsMap.put("timestamp", timestamp);
 		paramsMap.put("nonce", nonce);
 

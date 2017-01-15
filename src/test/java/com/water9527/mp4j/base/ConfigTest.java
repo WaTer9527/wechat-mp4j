@@ -17,11 +17,10 @@ public class ConfigTest {
 
 	@Test
 	public void testInit() {
-		assertNotNull(Config.getInstance());
-		assertNotNull(Config.getInstance().getAppId());
-		assertNotNull(Config.getInstance().getAppUrl());
-		assertNotNull(Config.getInstance().getAppSecret());
-		assertNotNull(Config.getInstance().getToken());
+		assertNotNull(Config.appId());
+		assertNotNull(Config.appUrl());
+		assertNotNull(Config.appSecret());
+		assertNotNull(Config.token());
 	}
 
 }

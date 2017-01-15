@@ -1,6 +1,5 @@
 package com.water9527.mp4j.base;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -8,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 微信接入配置类
+ * 公众号开发者配置类
  */
 public class Config {
 	
@@ -22,55 +21,99 @@ public class Config {
 	
 	private String token;
 	
-	private static Config instance;
+	private Config() {}
 	
-	public synchronized static Config getInstance() {
-		if(instance == null)
-			instance = new Config();
-		return instance;
-	}
-
-	public Config() {
-		init();
-	}
+	private static Config instance = new Config();
 	
-	private void init() {
-		logger.info("start init config");
+	// 初始化配置文件
+	static {
+		logger.debug("start init config");
 		
 		try {
-			InputStream in = Config.class.getResourceAsStream("/wechatConfig.properties");
+			InputStream in = Config.class.getResourceAsStream("/wechat.properties");
 			Properties properties = new Properties();
 			properties.load(in);
 			
-			appUrl = properties.getProperty("appUrl");
-			appId = properties.getProperty("appId");
-			appSecret = properties.getProperty("appSecret");
-			token = properties.getProperty("token");
+			String appUrl = properties.getProperty("appUrl");
+			String appId = properties.getProperty("appId");
+			String appSecret = properties.getProperty("appSecret");
+			String token = properties.getProperty("token");
 			
-			logger.info("appUrl:" + appUrl);
-			logger.info("appId:" + appId);
-			logger.info("appSecret.length:" + appSecret.length());
-			logger.info("token.length:" + token.length());
+			instance.setAppId(appId);
+			instance.setAppSecret(appSecret);
+			instance.setToken(token);
+			instance.setAppUrl(appUrl);
 			
-		} catch (IOException e) {
-			logger.error("load config file failed, message:" + e.getMessage());
+			if(logger.isDebugEnabled()) {
+				logger.debug("appUrl:" + appUrl);
+				logger.debug("appId:" + appId);
+				logger.debug("appSecret.length:" + appSecret.length());
+				logger.debug("token.length:" + token.length());
+			}
+			
+		} catch (Exception e) {
+			logger.error("load wechat config file failed", e);
 		}
 	}
+	
+	/**
+	 * 获取分配给开发者的appId
+	 */
+	public static String appId() {
+		return instance.getAppId();
+	}
 
-	public String getAppUrl() {
+	/**
+	 * 获取分配给开发者的appSecret
+	 */
+	public static String appSecret() {
+		return instance.getAppSecret();
+	}
+
+	/**
+	 * 获取公众号项目的地址
+	 */
+	public static String appUrl() {
+		return instance.getAppUrl();
+	}
+
+	/**
+	 * 获取服务器配置的token
+	 */
+	public static String token() {
+		return instance.getToken();
+	}
+	
+	private String getAppUrl() {
 		return appUrl;
 	}
 
-	public String getAppId() {
+	private String getAppId() {
 		return appId;
 	}
 
-	public String getAppSecret() {
+	private String getAppSecret() {
 		return appSecret;
 	}
 
-	public String getToken() {
+	private String getToken() {
 		return token;
+	}
+
+	private void setAppUrl(String appUrl) {
+		this.appUrl = appUrl;
+	}
+
+	private void setAppId(String appId) {
+		this.appId = appId;
+	}
+
+	private void setAppSecret(String appSecret) {
+		this.appSecret = appSecret;
+	}
+
+	private void setToken(String token) {
+		this.token = token;
 	}
 
 }

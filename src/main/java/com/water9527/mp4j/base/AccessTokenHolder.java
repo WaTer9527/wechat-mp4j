@@ -32,8 +32,8 @@ public class AccessTokenHolder {
 		logger.info("request oauth2 accessToken");
 		Oauth2AccessToken token = null;
 
-		String url = WechatConstants.API_GET_OAUTH2_ACCESS_TOKEN.replace("APPID", Config.getInstance().getAppId())
-				.replace("SECRET", Config.getInstance().getAppSecret()).replace("CODE", code);
+		String url = WechatConstants.API_GET_OAUTH2_ACCESS_TOKEN.replace("APPID", Config.appId())
+				.replace("SECRET", Config.appSecret()).replace("CODE", code);
 		String entity = HttpUtils.httpGet(url);
 
 		JSONObject jsonObject = JSON.parseObject(entity);
@@ -71,8 +71,8 @@ public class AccessTokenHolder {
 	private static void requestAccessToken() {
 		logger.info("请求AccessToken");
 
-		String url = WechatConstants.API_GET_ACCESS_TOKEN.replace("APPID", Config.getInstance().getAppId())
-				.replace("APPSECRET", Config.getInstance().getAppSecret());
+		String url = WechatConstants.API_GET_ACCESS_TOKEN.replace("APPID", Config.appId())
+				.replace("APPSECRET", Config.appSecret());
 		String entity = HttpUtils.httpGet(url);
 
 		JSONObject jsonObject = JSONObject.parseObject(entity);
