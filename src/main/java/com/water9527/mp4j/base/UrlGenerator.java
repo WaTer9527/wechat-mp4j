@@ -113,6 +113,11 @@ public class UrlGenerator {
 	 * 发送客服消息接口
 	 */
 	public static final String API_SEND_CUSTOM_MESSAGE = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=ACCESS_TOKEN";
+	
+	/**
+	 * 发送模板消息
+	 */
+	public static final String API_SEND_TEMPLATE_MESSAGE = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN";
 
 	public static String getAccessToken() {
 		return API_GET_ACCESS_TOKEN;
@@ -148,5 +153,9 @@ public class UrlGenerator {
 	
 	public static String getUserInfo(String accessToken, String openId) {
 		return API_GET_USER_INFO.replace(PLACEHOLDER_ACCESS_TOKEN, accessToken).replace(PLACEHOLDER_OPEN_ID, openId);
+	}
+	
+	public static String sendTemplateMessage(String accessToken) {
+		return API_SEND_TEMPLATE_MESSAGE.replace(PLACEHOLDER_ACCESS_TOKEN, accessToken);
 	}
 }
