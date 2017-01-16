@@ -1,13 +1,3 @@
-/**
- * @File : User.java
- * @Description :
- * 
- * 
- * @author : WaTer
- * @Date : 2016年4月15日
- * @Version : V1.0
- * @Copyright : 幸福时代网络科技（北京）股份有限公司
- */
 package com.water9527.mp4j.modules.user;
 
 import com.alibaba.fastjson.annotation.JSONField;
